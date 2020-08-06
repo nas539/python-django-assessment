@@ -16,9 +16,16 @@ class MovieListView(ListView):
 
     model = Movie
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["movie_list"] = Movie.objects.all()
+        return context
 
 class MovieDetailView(DetailView):
     """Show the requested movie."""
+
+    context_object_name = 'movie'
+    queryset = Movie.objects.all()
 
 
 class MovieCreateView(CreateView):
