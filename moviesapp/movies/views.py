@@ -32,11 +32,17 @@ class MovieDetailView(DetailView):
 
 class MovieCreateView(CreateView):
     """Create a new movie."""
+    model = Movie
+    template_name = 'movies/movie_form.html'
 
 
 class MovieUpdateView(UpdateView):
     """Update the requested movie."""
+    model = Movie
+    template_name = 'movies/movie_form.html'
 
 
 class MovieDeleteView(DeleteView):
     """Delete the requested movie."""
+    model = Movie
+    template_name = 'movies/movie_confirm_delete.html'
