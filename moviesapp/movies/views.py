@@ -4,6 +4,7 @@
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.http import Http404
 from django.urls import reverse_lazy
@@ -21,6 +22,7 @@ class MovieListView(ListView):
         qs = super(MovieListView, self).get_queryset(*args, **kwargs) 
         qs = qs.order_by("-year") 
         return qs 
+        
     # def get_queryset(self):
     #     return Movie.objects.order_by('-year')
     
@@ -37,21 +39,30 @@ class MovieDetailView(DetailView):
         return context
 
 
-class MovieCreateView(CreateView):
+class MovieCreateView(SuccessMessageMixin, CreateView):
     """Create a new movie."""
     model = Movie
-    fields = ["title", "year", "rated", "realeased_on", "genre", "director", "plot"]
+    fields = ["title", "year", "rated", "released_on", "genre", "director", "plot"]
     template_name = 'movies/movie_form.html'
-
-
-class MovieUpdateView(UpdateView):
+    # messages.add_message(messages.SUCCESS, 'The movie has been successfully created!')
+    # messages.add_message(messages.ERROR, 'The creation has failed.')
+    success_message = 'The movie has been successfully created!'
+    # messages.error(request, 'The creation has failed.')
+    
+class MovieUpdateView(SuccessMessageMixin, UpdateView):
     """Update the requested movie."""
     model = Movie
-    fields = ["title", "year", "rated", "realeased_on", "genre", "director", "plot"]
+    fields = ["title", "year", "rated", "released_on", "genre", "director", "plot"]
     template_name = 'movies/movie_form.html'
+    # messages.add_message(messages.SUCCESS, 'The movie has been successfully updated!')
+    # messages.add_message(messages.ERROR, 'The update has failed.')
+    success_message = 'The movie has been successfully updated!'
+    # messages.error(request, 'The update has failed.')
 
 
-class MovieDeleteView(DeleteView):
+class MovieDeleteView(SuccessMessageMixin, DeleteView):
     """Delete the requested movie."""
     model = Movie
     template_name = 'movies/movie_confirm_delete.html'
+    success_message = 'The movie has been successfully deleted!'
+    # messages.error(request, 'The deletion has failed.') 
