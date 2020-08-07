@@ -14,18 +14,20 @@ from .models import Movie
 class MovieListView(ListView):
     """Show all movies."""
 
-    model = Movie
+    # model = Movie
+    template_name = 'movies/movie_list.html'
+   
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["movie_list"] = Movie.objects.all()
-        return context
+    def get_queryset(self):
+        return Movie.objects.order_by('-year')
+    
+
 
 class MovieDetailView(DetailView):
     """Show the requested movie."""
 
-    context_object_name = 'movie'
-    queryset = Movie.objects.all()
+    model = Movie
+    template_name = 'movies/movie_detail.html'
 
 
 class MovieCreateView(CreateView):
