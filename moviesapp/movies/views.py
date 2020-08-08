@@ -42,13 +42,13 @@ class MovieDetailView(DetailView):
 class MovieCreateView(SuccessMessageMixin, CreateView):
     """Create a new movie."""
     model = Movie
-    fields = ["title", "year", "rated", "released_on", "genre", "director", "plot"]
     template_name = 'movies/movie_form.html'
     # messages.add_message(messages.SUCCESS, 'The movie has been successfully created!')
     # messages.add_message(messages.ERROR, 'The creation has failed.')
     # success_message = 'The movie has been successfully created!'
     # messages.error(request, 'The creation has failed.')
     def create(self, request):
+        fields = ["title", "year", "rated", "released_on", "genre", "director", "plot"]
         if self.request:
             return messages.success(self.request, 'The movie has been successfully created!')
         else:
@@ -57,13 +57,13 @@ class MovieCreateView(SuccessMessageMixin, CreateView):
 class MovieUpdateView(SuccessMessageMixin, UpdateView):
     """Update the requested movie."""
     model = Movie
-    fields = ["title", "year", "rated", "released_on", "genre", "director", "plot"]
     template_name = 'movies/movie_form.html'
     # messages.add_message(messages.SUCCESS, 'The movie has been successfully updated!')
     # messages.add_message(messages.ERROR, 'The update has failed.')
     # success_message = 'The movie has been successfully updated!'
     # messages.error(request, 'The update has failed.')
     def update(self, request):
+        fields = ["title", "year", "rated", "released_on", "genre", "director", "plot"]
         if self.request:
             return messages.success(self.request, 'The movie has been successfully updated!')
         else:
