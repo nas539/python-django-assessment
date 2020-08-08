@@ -46,8 +46,13 @@ class MovieCreateView(SuccessMessageMixin, CreateView):
     template_name = 'movies/movie_form.html'
     # messages.add_message(messages.SUCCESS, 'The movie has been successfully created!')
     # messages.add_message(messages.ERROR, 'The creation has failed.')
-    success_message = 'The movie has been successfully created!'
+    # success_message = 'The movie has been successfully created!'
     # messages.error(request, 'The creation has failed.')
+    def create(self, request):
+        if self.request:
+            return messages.success(self.request, 'The movie has been successfully created!')
+        else:
+            return messages.error(self.request, 'The creation has failed.')
     
 class MovieUpdateView(SuccessMessageMixin, UpdateView):
     """Update the requested movie."""
@@ -56,13 +61,23 @@ class MovieUpdateView(SuccessMessageMixin, UpdateView):
     template_name = 'movies/movie_form.html'
     # messages.add_message(messages.SUCCESS, 'The movie has been successfully updated!')
     # messages.add_message(messages.ERROR, 'The update has failed.')
-    success_message = 'The movie has been successfully updated!'
+    # success_message = 'The movie has been successfully updated!'
     # messages.error(request, 'The update has failed.')
+    def update(self, request):
+        if self.request:
+            return messages.success(self.request, 'The movie has been successfully updated!')
+        else:
+            return messages.error(self.request, 'The update has failed.')
 
 
 class MovieDeleteView(SuccessMessageMixin, DeleteView):
     """Delete the requested movie."""
     model = Movie
     template_name = 'movies/movie_confirm_delete.html'
-    success_message = 'The movie has been successfully deleted!'
-    # messages.error(request, 'The deletion has failed.') 
+    # success_message = 'The movie has been successfully deleted!'
+    # messages.error(request, 'The deletion has failed.')
+    def delete(self, request):
+        if self.request:
+            return messages.success(self.request, 'The movie has been successfully deleted!')
+        else:
+            return messages.error(self.request, 'The deletion has failed.')
