@@ -17,12 +17,17 @@ class Movie(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
     total_rating = models.PositiveIntegerField(default=0)
-    number_of_reviews = models.PositiveIntegerField(default=0)
-    
+    number_of_reviews = models.PositiveIntegerField(default=0 max_value=5 min_value=0)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('movies:detail', kwargs={'id': self.pk})
+
+class Comment(models.Model)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    comment = models.TextField(blank=True, null=True max_length=3000)
+
+    
 
