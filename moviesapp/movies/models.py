@@ -29,5 +29,6 @@ class Comment(models.Model)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     comment = models.TextField(blank=True, null=True max_length=3000)
 
-    
+    def __str__(self):
+        return self.comment
 
