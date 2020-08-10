@@ -36,6 +36,7 @@ class MovieDetailView(DetailView):
 
     def get_movie_details(self, *args, **kwargs):
         context = super(MovieDetailView, self).get_movie_details(*args, **kwargs)
+        rating = context.total_rating / context.number_of_reviews
         return context
 
 
