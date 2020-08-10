@@ -17,7 +17,7 @@ class Movie(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
     total_rating = models.PositiveIntegerField(default=0)
-    number_of_reviews = models.PositiveIngetgerField(default=0)
+    number_of_reviews = models.PositiveIntegerField(default=0)
     
 
     def __str__(self):
